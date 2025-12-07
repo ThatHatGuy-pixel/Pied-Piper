@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <title>Creator Control Center</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- MAIN STYLES -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+
+<body>
+  <div class="app-shell">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="brand">
+        <!-- REPLACE with your logo image if you want -->
+        <!-- Example:
+        <img src="assets/logo.png" alt="Your Logo" class="brand-logo" />
+        -->
+        <div class="brand-mark">CC</div>
+        <div class="brand-text">
+          <span class="brand-title">Creator Control</span>
+          <span class="brand-subtitle">Portfolio & Dev Hub</span>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-link active" data-section="dashboard">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-link" data-section="portfolio">
+          <span class="nav-icon">🎨</span>
+          <span>Portfolio</span>
+        </button>
+        <button class="nav-link" data-section="blog">
+          <span class="nav-icon">📝</span>
+          <span>Blog</span>
+        </button>
+        <button class="nav-link" data-section="media">
+          <span class="nav-icon">📂</span>
+          <span>Media Library</span>
+        </button>
+        <button class="nav-link" data-section="planner">
+          <span class="nav-icon">📌</span>
+          <span>Project Planner</span>
+        </button>
+        <button class="nav-link" data-section="settings">
+          <span class="nav-icon">⚙️</span>
+          <span>Settings</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="quick-profile">
+          <!-- REPLACE with your avatar image if you want -->
+          <!-- Example:
+          <img src="assets/avatar.png" alt="Your avatar" class="profile-avatar" />
+          -->
+          <div class="profile-avatar placeholder-avatar">YOU</div>
+          <div class="profile-meta">
+            <!-- REPLACE with your alias -->
+            <div class="profile-name">Your Alias</div>
+            <div class="profile-role">Artist • Dev • Designer</div>
+          </div>
+        </div>
+        <button id="themeToggle" class="ghost-button">
+          Toggle Light / Dark
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+      <!-- TOP BAR -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <h1 class="page-title" id="pageTitle">Dashboard</h1>
+          <p class="page-subtitle">
+            Central hub for your art, game dev, and blog content.
+          </p>
+        </div>
+
+        <!-- GLOBAL SEARCH -->
+        <div class="topbar-right">
+          <div class="search-global">
+            <input
+              type="search"
+              id="globalSearchInput"
+              placeholder="Search projects & blog posts..."
+            />
+            <button id="globalSearchClear" title="Clear search">✖</button>
+          </div>
+        </div>
+      </header>
+
+      <!-- SECTIONS WRAPPER -->
+      <section class="sections">
+        <!-- DASHBOARD SECTION -->
+        <section id="section-dashboard" class="section active">
+          <div class="grid dashboard-grid">
+            <article class="card metric-card">
+              <h2>Total Projects</h2>
+              <p class="metric-number" id="metricProjects">0</p>
+              <p class="metric-note">From all portfolio categories.</p>
+            </article>
+            <article class="card metric-card">
+              <h2>Blog Posts</h2>
+              <p class="metric-number" id="metricPosts">0</p>
+              <p class="metric-note">Dev logs, breakdowns & more.</p>
+            </article>
+            <article class="card metric-card">
+              <h2>Media Items</h2>
+              <p class="metric-number" id="metricMedia">0</p>
+              <p class="metric-note">Images, sprites, videos & audio.</p>
+            </article>
+            <article class="card metric-card">
+              <h2>Focus Mode</h2>
+              <p class="metric-number" id="focusModeStatus">OFF</p>
+              <p class="metric-note">Use Settings to enable/disable.</p>
+            </article>
+          </div>
+
+          <div class="grid dashboard-grid">
+            <article class="card wide-card">
+              <header class="card-header">
+                <h2>Timeline</h2>
+                <span class="pill">Auto-generated example data</span>
+              </header>
+              <ul class="timeline" id="timelineList">
+                <!-- Filled by script.js with example milestones -->
+              </ul>
+            </article>
+
+            <article class="card wide-card">
+              <header class="card-header">
+                <h2>Quick Notes</h2>
+                <span class="pill pill-muted">Stored in your browser only</span>
+              </header>
+              <textarea
+                id="quickNotes"
+                placeholder="Write quick ideas, TODOs, character concepts, etc. Saved automatically."
+              ></textarea>
+            </article>
+          </div>
+        </section>
+
+        <!-- PORTFOLIO SECTION -->
+        <section id="section-portfolio" class="section">
+          <div class="section-header">
+            <h2>Portfolio</h2>
+            <p>Filterable gallery with modal viewer for large previews.</p>
+          </div>
+
+          <div class="portfolio-controls">
+            <div class="chip-group" id="portfolioFilters">
+              <!-- Filter chips generated in JS -->
+            </div>
+            <div class="portfolio-search">
+              <input
+                type="search"
+                id="portfolioSearchInput"
+                placeholder="Search portfolio by title or tags..."
+              />
+            </div>
+          </div>
+
+          <div class="grid portfolio-grid" id="portfolioGrid">
+            <!-- Project cards generated in JS -->
+          </div>
+        </section>
+
+        <!-- BLOG SECTION -->
+        <section id="section-blog" class="section">
+          <div class="section-header">
+            <h2>Blog & Dev Logs</h2>
+            <p>Document your progress, ideas and post-mortems.</p>
+          </div>
+
+          <div class="blog-controls">
+            <div class="blog-search">
+              <input
+                type="search"
+                id="blogSearchInput"
+                placeholder="Search blog titles and content..."
+              />
+            </div>
+            <select id="blogTagFilter">
+              <option value="all">All tags</option>
+              <!-- More options added via JS -->
+            </select>
+          </div>
+
+          <div class="blog-list" id="blogList">
+            <!-- Blog post previews generated in JS -->
+          </div>
+        </section>
+
+        <!-- MEDIA LIBRARY SECTION -->
+        <section id="section-media" class="section">
+          <div class="section-header">
+            <h2>Media Library</h2>
+            <p>Index of all files your site expects to exist.</p>
+          </div>
+
+          <div class="grid media-grid">
+            <!-- IMAGES -->
+            <article class="card">
+              <h3>Images & Illustrations</h3>
+              <p>
+                Put these files in a folder like
+                <code>/assets/images/</code>. Replace the paths in
+                <code>script.js</code> and <code>index.html</code>.
+              </p>
+              <ul class="media-list" id="mediaImages">
+                <!-- Filled by JS. Example entry:
+                  <li>
+                    <code>assets/images/hero-banner.jpg</code>
+                    - Home page hero banner (recommended 1920x1080)
+                  </li>
+                -->
+              </ul>
+            </article>
+
+            <!-- SPRITES -->
+            <article class="card">
+              <h3>Sprites & Game Assets</h3>
+              <p>
+                Ideal for top-down sprites, character sheets, icons, etc.
+                Store in <code>/assets/sprites/</code>.
+              </p>
+              <ul class="media-list" id="mediaSprites"></ul>
+            </article>
+
+            <!-- VIDEO -->
+            <article class="card">
+              <h3>Video</h3>
+              <p>
+                For reels, animation tests, trailers. Store in
+                <code>/assets/video/</code>.
+              </p>
+              <ul class="media-list" id="mediaVideo"></ul>
+            </article>
+
+            <!-- AUDIO -->
+            <article class="card">
+              <h3>Audio</h3>
+              <p>
+                For music, SFX demo reels. Store in
+                <code>/assets/audio/</code>.
+              </p>
+              <ul class="media-list" id="mediaAudio"></ul>
+            </article>
+          </div>
+        </section>
+
+        <!-- PROJECT PLANNER SECTION -->
+        <section id="section-planner" class="section">
+          <div class="section-header">
+            <h2>Project Planner</h2>
+            <p>Drag tasks between columns (Todo → Doing → Done).</p>
+          </div>
+
+          <div class="planner-toolbar">
+            <input
+              type="text"
+              id="newTaskTitle"
+              placeholder="New task: e.g. 'Rig main character facial controls'"
+            />
+            <button id="addTaskButton">Add Task</button>
+            <span class="planner-hint">
+              Drag cards between columns. Everything is stored locally in your
+              browser.
+            </span>
+          </div>
+
+          <div class="planner-board">
+            <div class="planner-column" data-status="todo">
+              <h3>Todo</h3>
+              <div class="planner-dropzone" id="plannerTodo"></div>
+            </div>
+            <div class="planner-column" data-status="doing">
+              <h3>In Progress</h3>
+              <div class="planner-dropzone" id="plannerDoing"></div>
+            </div>
+            <div class="planner-column" data-status="done">
+              <h3>Done</h3>
+              <div class="planner-dropzone" id="plannerDone"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SETTINGS SECTION -->
+        <section id="section-settings" class="section">
+          <div class="section-header">
+            <h2>Settings</h2>
+            <p>Customise the look & behaviour of your control center.</p>
+          </div>
+
+          <div class="grid settings-grid">
+            <article class="card">
+              <h3>Theme</h3>
+              <p>Switch between light and dark mode.</p>
+              <button id="settingsThemeToggle">Toggle Light / Dark</button>
+            </article>
+
+            <article class="card">
+              <h3>Accent Color</h3>
+              <p>Pick your brand color (used on buttons, chips, etc.).</p>
+              <input type="color" id="accentColorPicker" />
+            </article>
+
+            <article class="card">
+              <h3>Base Font Size</h3>
+              <p>Scale the entire UI text up or down.</p>
+              <input
+                type="range"
+                id="fontSizeSlider"
+                min="14"
+                max="20"
+                value="16"
+              />
+              <p>
+                <span id="fontSizeValue">16</span> px
+              </p>
+            </article>
+
+            <article class="card">
+              <h3>Focus Mode</h3>
+              <p>
+                When enabled, hides some visual clutter and emphasises the main
+                content area.
+              </p>
+              <label class="switch">
+                <input type="checkbox" id="focusModeCheckbox" />
+                <span class="slider"></span>
+                <span class="switch-label">Enable Focus Mode</span>
+              </label>
+            </article>
+
+            <article class="card wide-card">
+              <h3>Reset Preferences</h3>
+              <p>
+                Clears all locally stored settings, tasks, and notes. Your media
+                and data files are not touched (they live on disk / GitHub).
+              </p>
+              <button id="resetAllButton" class="danger-button">
+                Reset Everything
+              </button>
+            </article>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <!-- MODAL FOR PORTFOLIO & BLOG -->
+  <div id="modalOverlay" class="modal-overlay hidden">
+    <div class="modal">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div id="modalContent"><!-- Filled by JS --></div>
+    </div>
+  </div>
+
+  <!-- MAIN SCRIPT -->
+  <script src="script.js" defer></script>
+</body>
+</html>
